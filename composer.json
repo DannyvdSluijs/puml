@@ -1,15 +1,15 @@
 {
-    "name": "puml/puml",
+    "name": "DannyvdSluijs/puml",
     "description": "PHP UML Generator",
     "keywords": ["uml", "generator", "reverse enginering"],
-    "homepage": "http://dannyvandersluijs.nl/puml",
+    "homepage": "https://github.com/DannyvdSluijs/puml",
     "type": "library",
     "license": "MIT",
     "authors": [
         {
             "name": "Danny van der Sluijs",
             "email": "danny.vandersluijs@fleppuhstein.com",
-            "homepage": "http://www.vandersluijs.nl"
+            "homepage": "https://github.com/DannyvdSluijs"
         }
     ],
     "support": {
