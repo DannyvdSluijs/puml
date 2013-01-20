@@ -1,0 +1,12 @@
+#!/usr/bin/env php
+<?php
+
+require __DIR__.'/../src/bootstrap.php';
+
+use Puml\Console\Application;
+
+error_reporting(-1);
+
+// run the command application
+$application = new Application();
+$application->run();

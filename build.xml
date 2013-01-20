@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="puml" default="build">
+    <target name="build" depends="prepare,lint,phploc,pdepend,phpmd,phpcpd,phpunit,package" />
+
+    <target name="clean" description="Clean build artifacts">
+        <delete dir="${basedir}/build"/>
+    </target>
+
+    <target name="prepare" depends="clean" description="Prepare for build">
+        <mkdir dir="${basedir}/build/logs"/>
+        <mkdir dir="${basedir}/build/coverage"/>
+        <mkdir dir="${basedir}/build/pdepend"/>
+        <exec executable="composer.phar" failonerror="true">
+            <arg value="install" />
+            <arg value="--dev" />
+        </exec>
+    </target>
+
+    <target name="lint" description="Perform syntax check of sourcecode files">
+        <apply executable="php" failonerror="true">
+        <arg value="-l" />
+
+        <fileset dir="${basedir}/">
+            <include name="**/*.php" />
+            <exclude name="vendor/" />
+            <modified />
+        </fileset>
+        </apply>
+    </target>
+
+    <target name="phploc" description="Measure project size using PHPLOC">
+        <exec executable="phploc">
+            <arg value="--log-csv" />
+            <arg value="${basedir}/build/logs/phploc.csv" />
+            <arg value="--exclude" />
+            <arg value="${basedir}/cache,${basedir}/vendor" />
+            <arg path="${basedir}/" />
+        </exec>
+    </target>
+
+    <target name="pdepend" description="Calculate software metrics using PHP_Depend">
+        <exec executable="pdepend">
+            <arg value="--jdepend-xml=${basedir}/build/logs/jdepend.xml" />
+            <arg value="--jdepend-chart=${basedir}/build/pdepend/dependencies.svg" />
+            <arg value="--overview-pyramid=${basedir}/build/pdepend/overview-pyramid.svg" />
+            <arg value="--ignore=${basedir}/cache,${basedir}/vendor" />
+            <arg path="${basedir}/" />
+        </exec>
+    </target>
+
+    <target name="phpmd" description="Perform project mess detection using PHPMD creating a log file for the continuous integration server">
+        <exec executable="phpmd">
+            <arg path="${basedir}/" />
+            <arg value="xml" />
+            <arg value="codesize,design,unusedcode,naming" />
+            <arg value="--reportfile" />
+            <arg value="${basedir}/build/logs/pmd.xml" />
+            <arg value="--exclude" />
+            <arg value="${basedir}/cache,${basedir}/vendor" />
+        </exec>
+    </target>
+
+    <target name="phpcpd" description="Find duplicate code using PHPCPD">
+        <exec executable="phpcpd">
+            <arg value="--log-pmd" />
+            <arg value="${basedir}/build/logs/pmd-cpd.xml" />
+            <arg value="--exclude" />
+            <arg value="${basedir}/cache,${basedir}/vendor" />
+            <arg path="${basedir}/" />
+        </exec>
+    </target>
+
+    <target name="phpunit" description="Run unit tests with PHPUnit">
+        <exec executable="phpunit" failonerror="true">
+            <arg value="--coverage-html"/>
+            <arg value="${basedir}/build/coverage/"/>
+        </exec>
+    </target>
+
+    <target name="package" description="Package the application for distribution">
+        <tar destfile="${basedir}/build/puml.tar.gz"
+            basedir="${basedir}/"
+            excludes="build/**, tests/**, phpunit.xml.dist, .gitignore, .travis.yml, build.xml, composer.json, composer.lock"
+            compression="gzip"
+            longfile="gnu"
+        />
+    </target>
+
+    <target name="phpdoc" description="Generate API documentation">
+        <exec executable="phpdoc" failonerror="true">
+            <arg value="-d" />
+            <arg path="${basedir}/src" />
+            <arg value="-t" />
+            <arg path="${basedir}/build/docs" />
+        </exec>
+    </target>
+
+    <target name="phpcs" description="Scan for code style violations">
+        <exec executable="phpcs" failonerror="true">
+            <arg value="--standard=PSR2" />
+            <arg path="${basedir}/src" />
+        </exec>
+    </target>
+</project>

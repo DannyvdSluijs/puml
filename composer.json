@@ -1,0 +1,34 @@
+{
+    "name": "puml/puml",
+    "description": "PHP UML Generator",
+    "keywords": ["uml", "generator", "reverse enginering"],
+    "homepage": "http://dannyvandersluijs.nl/puml",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Danny van der Sluijs",
+            "email": "danny.vandersluijs@fleppuhstein.com",
+            "homepage": "http://www.vandersluijs.nl"
+        }
+    ],
+    "support": {
+        "issues": "https://github.com/dannyvdsluijs/puml/issues"
+    },
+    "require": {
+        "php": ">=5.3.2",
+        "symfony/console": "2.1.*",
+        "symfony/finder": "2.1.*",
+        "symfony/process": "2.1.*",
+        "phpdocumentor/graphviz": "dev-master"
+
+    },
+    "repositories": [],
+    "suggest": {
+    },
+    "autoload": {
+        "psr-0": { "Puml": "src/" }
+    },
+    "extra": {
+    }
+}

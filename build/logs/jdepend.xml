@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PDepend>
+  <Packages>
+    <Package name="Puml">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>2</Ca>
+        <Ce>2</Ce>
+        <A>0</A>
+        <I>0.5</I>
+        <D>0.5</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/src/Puml/Analyser.php">Analyser</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package></Package>
+        <Package>Puml\Model</Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>Puml\Command</Package>
+        <Package>Puml\Test</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Puml\Command">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>1</Ca>
+        <Ce>5</Ce>
+        <A>0</A>
+        <I>0.83333333333333</I>
+        <D>0.16666666666667</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/src/Puml/Command/Generate.php">Generate</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package>Puml</Package>
+        <Package>Puml\Transformer</Package>
+        <Package>Symfony\Component\Console\Command</Package>
+        <Package>Symfony\Component\Console\Input</Package>
+        <Package>Symfony\Component\Console\Output</Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>Puml\Console</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Puml\Console">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>2</Ce>
+        <A>0</A>
+        <I>1</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/src/Puml/Console/Application.php">Application</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package>Puml\Command</Package>
+        <Package>Symfony\Component\Console</Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Puml\Model">
+      <Stats>
+        <TotalClasses>5</TotalClasses>
+        <ConcreteClasses>4</ConcreteClasses>
+        <AbstractClasses>1</AbstractClasses>
+        <Ca>3</Ca>
+        <Ce>1</Ce>
+        <A>0.2</A>
+        <I>0.25</I>
+        <D>0.55</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/src/Puml/Model/Method.php">Method</Class>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/src/Puml/Model/MethodParameter.php">MethodParameter</Class>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/src/Puml/Model/Object.php">Object</Class>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/src/Puml/Model/Property.php">Property</Class>
+      </ConcreteClasses>
+      <AbstractClasses>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/src/Puml/Model/ObjectItem.php">ObjectItem</Class>
+      </AbstractClasses>
+      <DependsUpon>
+        <Package></Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>Puml</Package>
+        <Package>Puml\Test\Model</Package>
+        <Package>Puml\Transformer</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Puml\Transformer">
+      <Stats>
+        <TotalClasses>4</TotalClasses>
+        <ConcreteClasses>3</ConcreteClasses>
+        <AbstractClasses>1</AbstractClasses>
+        <Ca>1</Ca>
+        <Ce>3</Ce>
+        <A>0.25</A>
+        <I>0.75</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/src/Puml/Transformer/Base.php">Base</Class>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/src/Puml/Transformer/Factory.php">Factory</Class>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/src/Puml/Transformer/GraphViz.php">GraphViz</Class>
+      </ConcreteClasses>
+      <AbstractClasses>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/src/Puml/Transformer/Transformer.php">Transformer</Class>
+      </AbstractClasses>
+      <DependsUpon>
+        <Package></Package>
+        <Package>Puml\Model</Package>
+        <Package>phpDocumentor\GraphViz</Package>
+      </DependsUpon>
+      <UsedBy>
+        <Package>Puml\Command</Package>
+      </UsedBy>
+    </Package>
+    <Package name="Puml\Test">
+      <Stats>
+        <TotalClasses>1</TotalClasses>
+        <ConcreteClasses>1</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>2</Ce>
+        <A>0</A>
+        <I>1</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/tests/Puml/Test/AnalyserTest.php">AnalyserTest</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package></Package>
+        <Package>Puml</Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+    <Package name="Puml\Test\Model">
+      <Stats>
+        <TotalClasses>4</TotalClasses>
+        <ConcreteClasses>4</ConcreteClasses>
+        <AbstractClasses>0</AbstractClasses>
+        <Ca>0</Ca>
+        <Ce>2</Ce>
+        <A>0</A>
+        <I>1</I>
+        <D>0</D>
+      </Stats>
+      <ConcreteClasses>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/tests/Puml/Test/Model/MethodParameterTest.php">MethodParameterTest</Class>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/tests/Puml/Test/Model/MethodTest.php">MethodTest</Class>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/tests/Puml/Test/Model/ObjectItemTest.php">ObjectItemTest</Class>
+        <Class sourceFile="/Users/danny/NetBeansProjects/puml/tests/Puml/Test/Model/ObjectTest.php">ObjectTest</Class>
+      </ConcreteClasses>
+      <AbstractClasses/>
+      <DependsUpon>
+        <Package></Package>
+        <Package>Puml\Model</Package>
+      </DependsUpon>
+      <UsedBy/>
+    </Package>
+  </Packages>
+  <Cycles/>
+</PDepend>
