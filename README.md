@@ -1,4 +1,4 @@
-# Puml: an PHP UML generator
+# Puml: an PHP UML generator [![Build Status](https://travis-ci.org/DnnyvdSluijs/puml.png)](https://travis-ci.org/dannyvandersluijs/puml)
 
 Puml is an PHP UML generator, which aids in reverse enginering and in a refactoring process. It allows you to generate the UML scheme for an object. Given that you take care of the autoloader.
 
