@@ -116,7 +116,7 @@ class Analyser
 
         $this->reflectedObject = new \ReflectionClass($this->objectName);
 
-        $this->object->setName($this->objectName);
+        $this->object->setName($this->reflectedObject->getName());
 
         /* Analyse its properties */
         $this->extractProperties($this->reflectedObject, $this->object);
