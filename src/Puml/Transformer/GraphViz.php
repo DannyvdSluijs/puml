@@ -91,9 +91,14 @@ class GraphViz extends Base implements Transformer
      *
      * @return void
      * @since 0.1
+     * @throws Exception
      */
     protected function transformParent(\Puml\Model\Object $child)
     {
+        if (!$child->hasParent()) {
+            throw new \Exception('Unable to transform parent, when no parent available, on class ' . $child->getName());
+        }
+
         $parent = $child->getParent();
         $this->transformObject($parent);
 
@@ -105,7 +110,7 @@ class GraphViz extends Base implements Transformer
         );
 
         if ($parent->hasParent()) {
-            $this->transformParent($parent->getParent(), $parent);
+            $this->transformParent($parent);
         }
     }
 
