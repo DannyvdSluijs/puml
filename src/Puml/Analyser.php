@@ -356,7 +356,7 @@ class Analyser
     protected function determineMethodType(\ReflectionMethod $reflectedMethod)
     {
         if (strlen($reflectedMethod->getDocComment())) {
-            $pattern = '/[ ]+\*[ ]+@return[ ]+([a-zA-Z\\\]+).*/';
+            $pattern = '/[ ]+\*[ ]+@return[ ]+([a-zA-Z_\\\]+).*/';
 
             preg_match($pattern, $reflectedMethod->getDocComment(), $matches);
 
