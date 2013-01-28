@@ -11,5 +11,24 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT
  */
 
-$loader = include(__DIR__ . '/../vendor/autoload.php');
+$files = array(
+    __DIR__ . '/../vendor/autoload.php',
+    __DIR__ . '/../../../autoload.php'
+);
+
+foreach ($files as $file) {
+    if (is_readable($file)) {
+        $loader = include($file);
+        break;
+    }
+}
+
+if (!$loader) {
+    die(
+        'You need to set up the project dependencies using the following commands:' . PHP_EOL .
+        'curl -s http://getcomposer.org/installer | php' . PHP_EOL .
+        'php composer.phar install' . PHP_EOL
+    );
+}
+
 return $loader;
