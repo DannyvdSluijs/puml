@@ -31,6 +31,12 @@ class GraphViz extends Base implements Transformer
     protected $graph;
 
     /**
+     * The level in parent(s)
+     * @var integer
+     */
+    protected $level = 0;
+
+    /**
      * Get the transformation possiblities supported by this transformer
      *
      * @return array<string>
@@ -40,7 +46,8 @@ class GraphViz extends Base implements Transformer
     {
         return array(
             'png',
-            'pdf'
+            'pdf',
+            'dot'
         );
     }
 
@@ -80,7 +87,28 @@ class GraphViz extends Base implements Transformer
      */
     public function postExecute()
     {
-        $this->graph->export($this->getTransformation(), $this->getFilename());
+        $type = escapeshellarg($this->getTransformation());
+        $filename = escapeshellarg($this->getFilename());
+
+        // write the dot file to a temporary file
+        $tmpfile = tempnam(sys_get_temp_dir(), 'gvz');
+        file_put_contents($tmpfile, (string) $this->graph);
+
+        // escape the temp file for use as argument
+        $tmpfile_arg = escapeshellarg($tmpfile);
+
+        // create the dot output
+        $output = array();
+        $code = 0;
+        exec("dot -T$type -o$filename -Kfdp -n < $tmpfile_arg 2>&1", $output, $code);
+        unlink($tmpfile);
+
+        if ($code != 0) {
+            throw new \Exception(
+                'An error occurred while creating the graph; GraphViz returned: '
+                . implode(PHP_EOL, $output)
+            );
+        }
         return $this;
     }
 
@@ -99,15 +127,17 @@ class GraphViz extends Base implements Transformer
             throw new \Exception('Unable to transform parent, when no parent available, on class ' . $child->getName());
         }
 
+        $this->level++;
+
         $parent = $child->getParent();
         $this->transformObject($parent);
 
-        $this->graph->link(
-            new Edge(
-                $this->graph->findNode($child->getName()),
-                $this->graph->findNode($parent->getName())
-            )
+        $edge = new Edge(
+            $this->graph->findNode($child->getName()),
+            $this->graph->findNode($parent->getName())
         );
+        $edge->setArrowhead('empty');
+        $this->graph->link($edge);
 
         if ($parent->hasParent()) {
             $this->transformParent($parent);
@@ -136,6 +166,7 @@ class GraphViz extends Base implements Transformer
         $node = new Node($object->getName());
         $node
             ->setShape('record')
+            ->setPos('0, ' . (0 + ($this->level * 3)) . '!')
             ->setLabel('"{' . $label . '}"');
 
         $this->graph->setNode($node);

@@ -36,6 +36,7 @@ class Factory
         switch ($pathInfo['extension']) {
             case 'png':
             case 'pdf':
+            case 'dot':
                 $transformer = new GraphViz();
 
                 break;
