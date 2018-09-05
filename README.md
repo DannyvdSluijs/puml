@@ -17,7 +17,7 @@ Puml is an PHP UML generator, which aids in reverse enginering and in a refactor
 
 ## Requirements
 * Most of the dependencies are handled by [composer](http://getcomposer.org). There are some requirements not handled by composer.
-  * dot - graphviz version
+  * dot - graphviz version. You can check this with `dot -V`
 
 ## Installing
 * This package is available on [packagist.org](https://packagist.org/packages/dannyvdsluijs/puml), and can be installed by adding the following to you composer.json
